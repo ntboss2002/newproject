@@ -1,0 +1,19 @@
+# Backend build artifacts
+backend/target/
+backend/.mvn/
+backend/*.class
+
+# Frontend build artifacts & dependencies
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+
+# IDE / OS
+.idea/
+*.iml
+.DS_Store
+*.swp
+
+# Env files
+.env
+.env.local
