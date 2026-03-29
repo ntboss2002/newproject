@@ -62,6 +62,12 @@ function rankPeers(peers: PeerInfo[]): PeerInfo[] {
   return [...peers].sort((a, b) => b.downloadSpeed - a.downloadSpeed)
 }
 
+const LIVE_STATUSES: DownloadTask['status'][] = ['ACTIVE', 'WAITING', 'PAUSED']
+
+function isLiveStatus(status: DownloadTask['status']): boolean {
+  return LIVE_STATUSES.includes(status)
+}
+
 // ── component ──────────────────────────────────────────────────────────────
 
 export default function DownloadPage() {
@@ -99,9 +105,7 @@ export default function DownloadPage() {
     fetchAll()
     const interval = setInterval(() => {
       // Only keep polling while there are non-terminal tasks
-      const hasLive = tasks.some(
-        (t) => t.status === 'ACTIVE' || t.status === 'WAITING' || t.status === 'PAUSED',
-      )
+      const hasLive = tasks.some((t) => isLiveStatus(t.status))
       if (hasLive || tasks.length === 0) {
         fetchAll()
       }
@@ -121,9 +125,8 @@ export default function DownloadPage() {
     if (expandedId !== null) {
       fetchExpanded(expandedId)
       // Only poll while the task is in a live state
-      const liveStatuses: DownloadTask['status'][] = ['ACTIVE', 'WAITING', 'PAUSED']
       const expandedStatus = tasks.find((t) => t.id === expandedId)?.status
-      if (expandedStatus && !liveStatuses.includes(expandedStatus)) {
+      if (expandedStatus && !isLiveStatus(expandedStatus)) {
         return
       }
       const interval = setInterval(() => fetchExpanded(expandedId), 3000)
@@ -452,7 +455,7 @@ function NodeAnalysisPanel({ peers }: NodeAnalysisPanelProps) {
           <tbody className="divide-y divide-gray-100 bg-white">
             {ranked.slice(0, 20).map((peer, i) => (
               <tr
-                key={i}
+                key={peer.peerId || i}
                 className={
                   i === 0 && peer.downloadSpeed > 0
                     ? 'bg-green-50'

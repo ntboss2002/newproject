@@ -1,7 +1,7 @@
-package com.example.shop.dto.response;
+package com.example.downloader.dto.response;
 
-import com.example.shop.model.DownloadStatus;
-import com.example.shop.model.DownloadType;
+import com.example.downloader.model.DownloadStatus;
+import com.example.downloader.model.DownloadType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.example.shop.model;
+package com.example.downloader.model;
 
 public enum DownloadType {
     TORRENT_URL,   // HTTP/HTTPS URL pointing to a .torrent file

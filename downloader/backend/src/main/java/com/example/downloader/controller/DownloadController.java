@@ -1,8 +1,8 @@
-package com.example.shop.controller;
+package com.example.downloader.controller;
 
-import com.example.shop.dto.request.DownloadRequest;
-import com.example.shop.dto.response.DownloadResponse;
-import com.example.shop.service.DownloadService;
+import com.example.downloader.dto.request.DownloadRequest;
+import com.example.downloader.dto.response.DownloadResponse;
+import com.example.downloader.service.DownloadService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -64,7 +64,7 @@ public class DownloadController {
      *
      * <p>Example (curl):
      * <pre>
-     *   curl -X POST http://localhost:8080/api/downloads/torrent \
+     *   curl -X POST http://localhost:8081/api/downloads/torrent \
      *        -F "file=@my.torrent" -F "savePath=/downloads"
      * </pre>
      */

@@ -1,7 +1,7 @@
-package com.example.shop.repository;
+package com.example.downloader.repository;
 
-import com.example.shop.model.DownloadStatus;
-import com.example.shop.model.DownloadTask;
+import com.example.downloader.model.DownloadStatus;
+import com.example.downloader.model.DownloadTask;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

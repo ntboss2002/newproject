@@ -1,6 +1,6 @@
-package com.example.shop.service;
+package com.example.downloader.service;
 
-import com.example.shop.dto.response.PeerInfo;
+import com.example.downloader.dto.response.PeerInfo;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;

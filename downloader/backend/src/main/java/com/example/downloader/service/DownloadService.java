@@ -1,13 +1,13 @@
-package com.example.shop.service;
+package com.example.downloader.service;
 
-import com.example.shop.dto.request.DownloadRequest;
-import com.example.shop.dto.response.DownloadResponse;
-import com.example.shop.dto.response.PeerInfo;
-import com.example.shop.exception.ResourceNotFoundException;
-import com.example.shop.model.DownloadStatus;
-import com.example.shop.model.DownloadTask;
-import com.example.shop.model.DownloadType;
-import com.example.shop.repository.DownloadTaskRepository;
+import com.example.downloader.dto.request.DownloadRequest;
+import com.example.downloader.dto.response.DownloadResponse;
+import com.example.downloader.dto.response.PeerInfo;
+import com.example.downloader.exception.ResourceNotFoundException;
+import com.example.downloader.model.DownloadStatus;
+import com.example.downloader.model.DownloadTask;
+import com.example.downloader.model.DownloadType;
+import com.example.downloader.repository.DownloadTaskRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -17,8 +17,10 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Base64;
 import java.util.Collections;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -28,6 +30,9 @@ public class DownloadService {
 
     private final DownloadTaskRepository repository;
     private final Aria2RpcClient aria2;
+
+    private static final Set<DownloadStatus> LIVE_STATUSES =
+            EnumSet.of(DownloadStatus.ACTIVE, DownloadStatus.WAITING, DownloadStatus.PAUSED);
 
     // -------------------------------------------------------------------------
     // Add downloads
@@ -265,9 +270,7 @@ public class DownloadService {
     }
 
     private boolean isLiveStatus(DownloadStatus status) {
-        return status == DownloadStatus.ACTIVE
-                || status == DownloadStatus.WAITING
-                || status == DownloadStatus.PAUSED;
+        return LIVE_STATUSES.contains(status);
     }
 
     private DownloadStatus mapAria2Status(String s) {
