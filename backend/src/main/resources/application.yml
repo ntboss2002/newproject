@@ -25,22 +25,3 @@ logging:
   level:
     com.example.shop: DEBUG
     org.springframework.security: DEBUG
-
-# -------------------------------------------------------
-# aria2 download daemon configuration
-# -------------------------------------------------------
-# Start aria2 with RPC support before using the download manager:
-#
-#   aria2c --enable-rpc \
-#          --rpc-listen-all \
-#          --rpc-secret=changeme \
-#          --rpc-listen-port=6800 \
-#          --continue=true \
-#          --max-concurrent-downloads=5
-#
-# Set ARIA2_RPC_SECRET to the same value used with --rpc-secret.
-# If you run aria2 without --rpc-secret (not recommended), leave it empty.
-aria2:
-  rpc:
-    url: ${ARIA2_RPC_URL:http://localhost:6800/jsonrpc}
-    secret: ${ARIA2_RPC_SECRET:}

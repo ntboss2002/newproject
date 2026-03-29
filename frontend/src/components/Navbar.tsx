@@ -24,10 +24,6 @@ export default function Navbar() {
             商品
           </Link>
 
-          <Link to="/downloads" className="text-gray-600 hover:text-primary-600 transition-colors">
-            📥 下载
-          </Link>
-
           <Link to="/cart" className="relative text-gray-600 hover:text-primary-600 transition-colors">
             🛒 购物车
             {totalItems > 0 && (
